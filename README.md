@@ -75,7 +75,7 @@ source env/bin/activate
 python scoreboard/scoreboard.py "scoreboard/fixtures/test_file.txt"
 ```
 
-** Results in
+**Results in**
 
 ```shell
 cat output.txt
