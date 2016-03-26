@@ -1,4 +1,4 @@
-Contest Scoreboard
+# Contest Scoreboard
 
 Want to compete in the ACM ICPC? Then you had better know how to keep score!
 Contestants are ranked first by the number of problems solved (the more the better),
@@ -12,7 +12,7 @@ took until the first correct submission for a problem was received, plus 20 minu
 each incorrect submission prior to the correct solution. Unsolved problems incur no
 time penalties.
 
-Input
+**Input**
 
 The input begin with a single positive interger on a line by itself indicating the number
 of case, each described as below. This line is followed by a blank line. There is also a
@@ -24,7 +24,8 @@ L can be C, I, R, U, or E. These stand for Correct, clarification Request,
 Unjudged, and Erroneoues submission. The last three cases do not affect scorring.
 The lines of input appear in the order in which the submission were received.
 
-Output
+**Output**
+
 
 The output for each test case will consist of a scoreboard, sorted by the criteria described
 above. Each line of output will contain a contestant number, the number of problems
@@ -34,13 +35,16 @@ have made a submission.
 The output of two consecutives cases will be separated by a blank line.
 
 Sample Input
+```shell
 1
 1 2 10 I
 3 1 11 C
 1 2 19 R
 1 2 21 C
 1 1 25 C
-
+```
 Sample Output
+```shell
 1 2 66
 3 1 11
+```
