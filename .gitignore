@@ -43,6 +43,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+coverage/
 .hypothesis/
 
 # Translations
@@ -60,3 +61,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#Sublime text
+*.sublime-*
+
+output_test_*.txt
+output.txt
