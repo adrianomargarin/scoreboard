@@ -48,3 +48,29 @@ Sample Output
 1 2 66
 3 1 11
 ```
+
+# Setup
+
+```shell
+git clone git@github.com:adrianomargarin/scoreboard.git
+cd path/to/scoreboard
+virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+# Testes
+
+```shell
+cd path/to/scoreboard
+source env/bin/activate
+./run_tests.sh
+```
+
+# Usage
+
+```shell
+cd path/to/scoreboard
+source env/bin/activate
+python scoreboard/scoreboard.py "scoreboard/fixtures/test_file.txt"
+```
