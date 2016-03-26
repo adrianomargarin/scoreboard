@@ -73,4 +73,5 @@ source env/bin/activate
 cd path/to/scoreboard
 source env/bin/activate
 python scoreboard/scoreboard.py "scoreboard/fixtures/test_file.txt"
+cat output.txt
 ```
