@@ -101,7 +101,6 @@ def main(pathfile):
             create_file_result(results)
     except IOError, e:
         raise e
-        # raise Exception(u'Não foi possível carregar o arquivo.')
 
 if __name__ == '__main__':
     main(sys.argv[1])
