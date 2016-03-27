@@ -115,13 +115,11 @@ class Result(object):
 
     def create_file(self, filename='output'):
         result = self.sort_result()
-        fl = open('%s.txt' % filename, 'w')
 
-        for team in result:
-            line = '%s %d %d\n' % (team.team, team.problems, team.score)
-            fl.write(line)
-
-        fl.close()
+        with open('%s.txt' % filename, 'w') as fl:
+            for team in result:
+                line = '%s %d %d\n' % (team.team, team.problems, team.score)
+                fl.write(line)
 
 if __name__ == '__main__':
     result = Result(**{'pathfile': sys.argv[1]})
