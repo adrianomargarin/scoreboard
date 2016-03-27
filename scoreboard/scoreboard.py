@@ -3,104 +3,125 @@
 import sys
 import re
 
-def check_scores_response(line):
-    score = 0
 
-    if line[3] == 'C':
-        score = int(line[2])
-    elif line[3] == 'I':
-        score = 20
+class Team(object):
 
-    return score
+    def check_problems(self, **kwargs):
+        problems = int(kwargs['problems'])
+        return problems if problems > self.problems else self.problems
 
-def add_score(line, results):
-    score = check_scores_response(line)
+    def check_score_response(self, **kwargs):
+        score = 0
 
-    index = 0
-    list_size = len(results)
+        if kwargs['response'] == 'C':
+            score = int(kwargs['score'])
+        elif kwargs['response'] == 'I':
+            score = 20
 
-    for result in results:
-        if line[0] == result['participant']:
-            result['score'] += score
-            if line[1] > result['problems']:
-                result['problems'] = line[1]
-            break
+        return score
 
-        index += 1
+    def create(self, **kwargs):
+        self.team = kwargs['team']
+        self.problems = int(kwargs['problems'])
+        self.score = self.check_score_response(**kwargs)
 
-    if index == list_size:
-        results.append({
-            'participant': line[0],
-            'problems': line[1],
-            'score': score,
-        })
+        return self
 
-    return results
+    def update(self, **kwargs):
+        self.problems = self.check_problems(**kwargs)
+        self.score += self.check_score_response(**kwargs)
 
-def _order_results_aux(results, index):
-    result_aux = results[index+1]
-    results[index+1] = results[index]
-    results[index] = result_aux
+        return self
 
-    return results
 
-def ordering_result_by_participant(results):
-    for index_a in range(0, len(results)):
-        for index_b in range(0, len(results)-1):
-            if results[index_b]['participant'] > results[index_b+1]['participant']:
-                results = _order_results_aux(results, index_b)
+class Result(object):
 
-    return results
+    def __init__(self, **kwargs):
+        self.results = []
+        self.pathfile = kwargs['pathfile']
 
-def ordering_result_by_score(results):
-    for index_a in range(0, len(results)):
-        for index_b in range(0, len(results)-1):
-            if results[index_b]['score'] < results[index_b+1]['score']:
-                results = _order_results_aux(results, index_b)
+    def create(self):
+        try:
+            with open(self.pathfile, 'r') as fl:
+                lines = fl.readlines()
+                lines.pop(0)
+                lines = [re.sub('\n', '', line) for line in lines]
 
-    return results
+                for line in lines:
+                    line = line.split(' ')
+                    self.add_line(**{'line': line})
 
-def ordering_result_by_problems(results):
-    for index_a in range(0, len(results)):
-        for index_b in range(0, len(results)-1):
-            if results[index_b]['problems'] < results[index_b+1]['problems']:
-                results = _order_results_aux(results, index_b)
+                return self.results
+        except IOError, e:
+            raise e
 
-    return results
+    def add_line(self, **kwargs):
+        is_new = True
+        line = {
+            'team': kwargs['line'][0],
+            'problems': kwargs['line'][1],
+            'score': kwargs['line'][2],
+            'response': kwargs['line'][3],
+        }
 
-def sort_results(results):
-    results = ordering_result_by_participant(results)
-    results = ordering_result_by_score(results)
-    results = ordering_result_by_problems(results)
+        for result in self.results:
+            if line['team'] == result.team:
+                result.update(**line)
+                is_new = False
+                break
 
-    return results
+        if is_new:
+            self.results.append(Team().create(**line))
 
-def create_file_result(results, filename='output'):
-    results = sort_results(results)
-    fl = open('%s.txt' % filename, 'w')
+        return self.results
 
-    for result in results:
-        line = '%s %s %d\n' % (result['participant'], result['problems'],
-            result['score'])
-        fl.write(line)
+    def _order_result_by_index(self, index):
+        result_aux = self.results[index+1]
+        self.results[index+1] = self.results[index]
+        self.results[index] = result_aux
 
-    fl.close()
+        return self.results
 
-def main(pathfile):
-    try:
-        with open(pathfile, 'r') as fl:
-            results = []
-            lines = fl.readlines()
-            lines.pop(0)
-            lines = [re.sub('\n', '', line) for line in lines]
+    def ordering_result_by_team(self):
+        for index_a in range(0, len(self.results)):
+            for index_b in range(0, len(self.results)-1):
+                if self.results[index_b].team > self.results[index_b+1].team:
+                    self.results = self._order_result_by_index(index_b)
 
-            for line in lines:
-                line = line.split(' ')
-                results = add_score(line, results)
+        return self.results
 
-            create_file_result(results)
-    except IOError, e:
-        raise e
+    def ordering_result_by_score(self):
+        for index_a in range(0, len(self.results)):
+            for index_b in range(0, len(self.results)-1):
+                if self.results[index_b].score < self.results[index_b+1].score:
+                    self.results = self._order_result_by_index(index_b)
+
+        return self.results
+
+    def ordering_result_by_problems(self):
+        for index_a in range(0, len(self.results)):
+            for index_b in range(0, len(self.results)-1):
+                if self.results[index_b].problems < self.results[index_b+1].problems:
+                    self.results = self._order_result_by_index(index_b)
+
+        return self.results
+
+    def sort_result(self):
+        self.ordering_result_by_team()
+        self.ordering_result_by_score()
+        self.ordering_result_by_problems()
+
+        return self.results
+
+    def create_file(self, filename='output'):
+        result = self.sort_result()
+
+        with open('%s.txt' % filename, 'w') as fl:
+            for team in result:
+                line = '%s %d %d\n' % (team.team, team.problems, team.score)
+                fl.write(line)
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    result = Result(**{'pathfile': sys.argv[1]})
+    result.create()
+    result.create_file()
