@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/adrianomargarin/scoreboard.svg?style=svg)](https://circleci.com/gh/adrianomargarin/scoreboard)
+
 # Contest Scoreboard
 
 Want to compete in the ACM ICPC? Then you had better know how to keep score!
