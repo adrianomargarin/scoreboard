@@ -3,6 +3,7 @@ machine:
     version: 2.7.9
 dependencies:
   pre:
+    - pip install --upgrade setuptools pip
     - pip install -r requirements.txt
 test:
   override:
