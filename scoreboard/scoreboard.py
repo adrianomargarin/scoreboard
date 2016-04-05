@@ -82,34 +82,10 @@ class Result(object):
 
         return self.results
 
-    def ordering_result_by_team(self):
-        for index_a in range(0, len(self.results)):
-            for index_b in range(0, len(self.results)-1):
-                if self.results[index_b].team > self.results[index_b+1].team:
-                    self.results = self._order_result_by_index(index_b)
-
-        return self.results
-
-    def ordering_result_by_score(self):
-        for index_a in range(0, len(self.results)):
-            for index_b in range(0, len(self.results)-1):
-                if self.results[index_b].score < self.results[index_b+1].score:
-                    self.results = self._order_result_by_index(index_b)
-
-        return self.results
-
-    def ordering_result_by_problems(self):
-        for index_a in range(0, len(self.results)):
-            for index_b in range(0, len(self.results)-1):
-                if self.results[index_b].problems < self.results[index_b+1].problems:
-                    self.results = self._order_result_by_index(index_b)
-
-        return self.results
-
     def sort_result(self):
-        self.ordering_result_by_team()
-        self.ordering_result_by_score()
-        self.ordering_result_by_problems()
+        self.results = sorted(self.results, key=lambda item: item.team)
+        self.results = sorted(self.results, key=lambda item: item.score, reverse=True)
+        self.results = sorted(self.results, key=lambda item: item.problems, reverse=True)
 
         return self.results
 

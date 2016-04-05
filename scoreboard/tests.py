@@ -151,34 +151,6 @@ class ScoreBoard(TestCase):
         self.assertEqual(result[0].team, '1')
         self.assertEqual(result[1].team, '3')
 
-    def test_ordering_result_by_team(self):
-        result = self.result.add_line(**{'line': self.line_6})
-        result = self.result.add_line(**{'line': self.line_7})
-        result = self.result.ordering_result_by_team()
-
-        self.assertEqual(result[0].team, '1')
-        self.assertEqual(result[1].team, '3')
-
-    def test_ordering_result_by_score(self):
-        result = self.result.add_line(**{'line': self.line_6})
-        result = self.result.add_line(**{'line': self.line_7})
-        result = self.result.ordering_result_by_score()
-
-        self.assertEqual(result[0].team, '1')
-        self.assertEqual(result[1].team, '3')
-
-    def test_ordering_result_by_problems(self):
-        result = self.result.add_line(**{'line': self.line_6})
-        result = self.result.add_line(**{'line': self.line_7})
-        result = self.result.ordering_result_by_problems()
-
-        self.assertEqual(result[0].team, '1')
-        self.assertEqual(result[0].problems, 2)
-        self.assertEqual(result[0].score, 66)
-        self.assertEqual(result[1].team, '3')
-        self.assertEqual(result[1].problems, 1)
-        self.assertEqual(result[1].score, 11)
-
     def test_sort_result(self):
         result = self.result.add_line(**{'line': self.line_6})
         result = self.result.add_line(**{'line': self.line_7})
