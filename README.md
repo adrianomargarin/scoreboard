@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/adrianomargarin/scoreboard/badges/gpa.svg)](https://codeclimate.com/github/adrianomargarin/scoreboard)
+
 # Contest Scoreboard
 
 Want to compete in the ACM ICPC? Then you had better know how to keep score!
