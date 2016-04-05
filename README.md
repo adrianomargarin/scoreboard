@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/adrianomargarin/scoreboard/badges/gpa.svg)](https://codeclimate.com/github/adrianomargarin/scoreboard)
+[![Circle CI](https://circleci.com/gh/adrianomargarin/scoreboard.svg?style=svg)](https://circleci.com/gh/adrianomargarin/scoreboard)
 
 # Contest Scoreboard
 
