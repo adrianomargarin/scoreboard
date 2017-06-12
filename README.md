@@ -1,6 +1,8 @@
 [![Code Climate](https://codeclimate.com/github/adrianomargarin/scoreboard/badges/gpa.svg)](https://codeclimate.com/github/adrianomargarin/scoreboard)
 [![Circle CI](https://circleci.com/gh/adrianomargarin/scoreboard.svg?style=svg)](https://circleci.com/gh/adrianomargarin/scoreboard)
 
+# Written in python 3
+
 # Contest Scoreboard
 
 Want to compete in the ACM ICPC? Then you had better know how to keep score!
@@ -81,5 +83,5 @@ python scoreboard/scoreboard.py "scoreboard/fixtures/test_file.txt"
 **Results in**
 
 ```shell
-cat output.txt
+cat /tmp/output.txt
 ```
