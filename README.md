@@ -1,4 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/adrianomargarin/scoreboard/badges/gpa.svg)](https://codeclimate.com/github/adrianomargarin/scoreboard)
 [![Circle CI](https://circleci.com/gh/adrianomargarin/scoreboard.svg?style=svg)](https://circleci.com/gh/adrianomargarin/scoreboard)
+
 # Contest Scoreboard
 
 Want to compete in the ACM ICPC? Then you had better know how to keep score!
@@ -52,15 +54,17 @@ Sample Output
 
 # Setup
 
+Written in python 3
+
 ```shell
 git clone git@github.com:adrianomargarin/scoreboard.git
 cd path/to/scoreboard
-virtualenv env
+virtualenv env --python=python3
 source env/bin/activate
 pip install -r requirements.txt
 ```
 
-# Testes
+# Tests
 
 ```shell
 cd path/to/scoreboard
@@ -79,5 +83,5 @@ python scoreboard/scoreboard.py "scoreboard/fixtures/test_file.txt"
 **Results in**
 
 ```shell
-cat output.txt
+cat /tmp/output.txt
 ```
